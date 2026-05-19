@@ -1,424 +1,447 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Xianzhe Meng</title>
+  <meta name="author" content="Xianzhe Meng">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <style>
+    /* 现代学术主页精简全局样式 */
+    :root {
+      --primary-color: #2b6cb0;
+      --hover-color: #3182ce;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --bg-light: #f7fafc;
+      --tag-bg: #edf2f7;
+    }
 
-	
-    <title>Xianzhe Meng</title>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-dark);
+      background-color: #ffffff;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
 
-    <meta name="author" content="Xianzhe Meng">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* 个人简介区域 Flex 布局 */
+    .profile-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .profile-section {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+    }
+
+    .profile-text {
+      flex: 1;
+    }
+
+    .profile-text h1 {
+      font-size: 2.5rem;
+      margin: 0 0 15px 0;
+      color: #1a202c;
+      font-weight: 800;
+      background: linear-gradient(120deg, #1a202c 0%, var(--primary-color) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .profile-text p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 3px solid #fff;
+      outline: 1px solid #e2e8f0;
+    }
+
+    /* 社交链接按钮 */
+    .links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 600px) {
+      .links { justify-content: center; }
+    }
+
+    .links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background-color: #f0f4f8;
+      transition: all 0.2s ease;
+    }
+
+    .links a:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* 全局板块标题 */
+    section {
+      margin-bottom: 45px;
+    }
+
+    h2 {
+      font-size: 20px;
+      border-bottom: 2px solid #edf2f7;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      color: #1a202c;
+      font-weight: 700;
+    }
+
+    /* 动态/荣誉 列表样式 */
+    .news-list, .awards-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .news-item {
+      display: flex;
+      margin-bottom: 12px;
+      font-size: 14px;
+      align-items: flex-start;
+    }
+
+    .news-date {
+      font-weight: 700;
+      min-width: 90px;
+      color: var(--primary-color);
+    }
+
+    .news-content {
+      flex: 1;
+    }
+
+    /* 论文与项目排版（无图轻量化设计） */
+    .pub-item {
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+    }
+
+    .pub-item:hover {
+      background-color: var(--bg-light);
+    }
+
+    .pub-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a202c;
+      margin: 0 0 6px 0;
+    }
+
+    .pub-title a {
+      color: #1a202c;
+      text-decoration: none;
+    }
+
+    .pub-title a:hover {
+      color: var(--primary-color);
+    }
+
+    .pub-authors {
+      font-size: 14px;
+      color: #4a5568;
+      margin-bottom: 6px;
+    }
+
+    .pub-venue {
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .pub-links {
+      font-size: 13px;
+    }
+
+    .pub-links a {
+      color: var(--primary-color);
+      margin-right: 12px;
+      font-weight: 600;
+    }
+
+    /* 技能与兴趣标签 */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .tag-title {
+      font-weight: bold;
+      min-width: 110px;
+      font-size: 14px;
+      color: #4a5568;
+      align-self: center;
+    }
+
+    .tag {
+      background-color: var(--tag-bg);
+      color: #4a5568;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .tag.highlight {
+      background-color: #ebf8ff;
+      color: #2b6cb0;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+      border-top: 1px solid #edf2f7;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
     
-    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Jianglan" />
-    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <div class="profile-section">
+      <div class="profile-text">
+        <h1>Xianzhe Meng</h1>
+        <p>
+          I am a sophomore undergraduate student majoring in Automation at the School of Artificial Intelligence and Automation, 
+          <a href="https://www.hust.edu.cn" target="_blank">Huazhong University of Science and Technology (HUST)</a>, 
+          where I am fortunate to be advised by <a href="https://scholar.google.com/citations?user=BrJUTvoAAAAJ&hl=en" target="_blank">Prof. Zhigang Zeng</a>.
+        </p>
+        <p>
+          My research interests lie in <strong>optimization theory</strong>, <strong>AI for Science</strong>, and <strong>reinforcement learning</strong>. 
+          I am deeply curious about replacing traditional heuristic approaches with precise, math-based algorithms, 
+          as well as designing novel machine learning architectures that break through existing structural bottlenecks.
+        </p>
+        <div class="links">
+          <a href="mailto:U202410203@hust.edu.cn">Email</a>
+          <a href="data/XianzheMeng-CV.pdf" target="_blank">CV</a>
+          <a href="https://scholar.google.com/citations?hl=en&user=fN0haOMAAAAJ" target="_blank">Google Scholar</a>
+          <a href="https://github.com/XianzheMeng" target="_blank">GitHub</a>
+          <a href="https://x.com/meng_xian79609" target="_blank">X (Twitter)</a>
+        </div>
+      </div>
+      <div>
+        <img class="profile-avatar" src="images/XianzheMeng.jpg" alt="Xianzhe Meng">
+      </div>
+    </div>
 
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <section id="news">
+      <h2>Recent News</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">Mar 2026</span>
+          <span class="news-content">Selected as the <strong>Star of Self-Improvement</strong> at the School of Artificial Intelligence and Automation (Ranked 7/387).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025 - 2026</span>
+          <span class="news-content">Served as the Presenter for the "Return to Alma Mater for Publicity and Sharing Event".</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Nov 2025</span>
+          <span class="news-content">Selected as the <strong>Outstanding Student</strong> of HUST (Top 279 out of 29,742 university-wide).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Sept 2024</span>
+          <span class="news-content">Appointed as the Study Monitor of the Automation Innovation Experimental Class (2024-Present).</span>
+        </li>
+      </ul>
+    </section>
 
-    <meta name="google-site-verification" content="e9hl6y8qGzmeQBmSVzYMyz_C_-V-_9yrb9lEEWvShm4" />
-    
-  </head>
+    <section id="awards">
+      <h2>Honors & Awards</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">2025</span>
+          <span class="news-content">First Prize in the China Mathematics Competition (Hubei Province, Ranked 59/1180).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025</span>
+          <span class="news-content">The Three Good Student Scholarship (Ranked 21/387).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025</span>
+          <span class="news-content">Second Prize in the HUST Social Practice Team Competition (As Team Leader).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025</span>
+          <span class="news-content">Third Prize in the Volcano Cup Artificial Intelligence Application Competition (As Team Leader).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2024</span>
+          <span class="news-content">Scholarship for Academic Excellence.</span>
+        </li>
+      </ul>
+    </section>
 
-  <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
-                <p class="name" style="text-align: center;">
-                  Xianzhe Meng
-                </p>
-                <p>
-    I am a sophomore undergrad in Automation at <a href="https://www.hust.edu.cn"> Huazhong University of Science and Technology</a>, advised by Prof. <a href="https://scholar.google.com/citations?user=BrJUTvoAAAAJ&hl=en"> Zhigang Zeng</a>.
-    I am interested in optimization theory, AI for Science and reinforcement learning. I am particularly curious about how we can fully understand existing mainstream algorithms, and extend our understanding to create much more precise math-based algorithms, rather than heuristic algorithms. I am also dedicated to searching for new structures of machine learning, which can break through the limitations of present algorithms.
-                </p>
-                <p style="text-align:center">
-                  <a href="mailto:U202410203@hust.edu.cn">Email</a> &nbsp;/&nbsp;
-                  <a href="data/XianzheMeng-CV.pdf">CV</a> &nbsp;/&nbsp;
-                  <a href="https://scholar.google.com/citations?hl=en&user=fN0haOMAAAAJ&view_op=list_works&gmla=AF9nlQuqiyG-PEUB6_obWe4pwC-D4nXNtJTG9Xe3zJzWkS4UrgiZXZNvY_FRTabtOhAv0NnPZra-duTLvi0ia_X6qjAT9VZ7Eh91g7bSrWsqIkPeE5_q_5vX4I4tc7TPnAjnOA">Scholar</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/XianzheMeng">GitHub</a> &nbsp;/&nbsp;
-                  <a href="https://x.com/meng_xian79609">X</a>
-                </p>
-              </td>
-              <td style="padding:2.5%;width:37%;max-width:37%">
-                <a href="images/XianzheMeng.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 10px;" alt="profile photo" src="images/XianzheMeng.jpg" class="hoverZoomLink"></a>
-              </td>
-            </tr>
-          </tbody></table>
+    <section id="publications">
+      <h2>Publications & Preprints</h2>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px;width:100%;vertical-align:middle">
-                <h2 style="margin-left:16px;">News</h2></span>
-              </td>
-            </tr>
-          </tbody></table>
+      <div class="pub-item">
+        <p class="pub-title"><a href="https://arxiv.org/abs/2601.18588" target="_blank">Stability as a Liability: Systematic Breakdown of Linguistic Structure in LLMs</a></p>
+        <div class="pub-authors"><strong>Xianzhe Meng*</strong>, Qiangsheng Zeng*, Ling Luo*, Qinghan Yang, Jiarui Hao, Wenbo Wu, Qinyu Wang, Rui Yin, Lin Qi, Renzhi Lu</div>
+        <div class="pub-venue">Preprint (Under Conference Review), 2026</div>
+        <div class="pub-links"><a href="https://arxiv.org/abs/2601.18588" target="_blank">arXiv</a></div>
+      </div>
 
-          <div style="height:16px;"></div>
+      <div class="pub-item">
+        <p class="pub-title">Application of Quantum Multi-Agent Reinforcement Learning in Microgrid Energy Scheduling</p>
+        <div class="pub-authors">Zhenyu Zhang, <strong>Xianzhe Meng</strong>, Manqiu Huang, Zhigang Zeng</div>
+        <div class="pub-venue">IEEE/CAA Journal of Automatica Sinica (JAS), 2026</div>
+        <div class="pub-links"><a href="#">arXiv</a><a href="#">Project Page</a></div>
+      </div>
 
-          <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+      <div class="pub-item">
+        <p class="pub-title">DSN: Energy-Efficient EMG Signal Classification Method Enabling Real-Time Monitoring for Edge Healthcare</p>
+        <div class="pub-authors">Zhenyu Zhang*, <strong>Xianzhe Meng*</strong>, Jianglan Wei, Mingjie Zeng, Zhigang Zeng</div>
+        <div class="pub-venue">Preprint (Under Journal Review), 2026</div>
+        <div class="pub-links"><a href="#">arXiv</a><a href="#">Project Page</a></div>
+      </div>
 
-		  <tr>
-              <td style="padding:0px;width:12%;min-width:100px;vertical-align:text-top">
-                <span style="margin-left:16px;font-weight:bold;"> Mar 2026 </span>
-              </td>
-              <td style="padding:0px;width:88%;vertical-align:text-top">
-                Selected as Star of Self-Improvement of School of Artificial Intelligence and Automation (7/387).
-              </td>
-            </tr>
-			  
-            <tr>
-              <td style="padding:0px;width:12%;min-width:100px;vertical-align:text-top">
-                <span style="margin-left:16px;font-weight:bold;"> Nov 2025 </span>
-              </td>
-              <td style="padding:0px;width:88%;vertical-align:text-top">
-                Selected as  <a href="https://ugs.hust.edu.cn/info/1142/7193.htm"> the Outstanding Student </a> of Huazhong University of Science and Technology (279/29742).
-              </td>
-            </tr>
+      <div class="pub-item">
+        <p class="pub-title">HUS-SNN: Homeostatic Unbiased Sparsity for N:M Sparse Spiking Neural Networks</p>
+        <div class="pub-authors"><strong>Xianzhe Meng*</strong>, Zhenyu Zhang*, Zihe Dong, Xueyi Wang, Yiming Guo</div>
+        <div class="pub-venue">Preprint (Under Conference Review), 2026</div>
+        <div class="pub-links"><a href="#">arXiv</a><a href="#">Project Page</a></div>
+      </div>
 
-            <tr>
-              <td style="padding:0px;width:12%;min-width:100px;vertical-align:text-top">
-                <span style="margin-left:16px;font-weight:bold;"> Sep 2025 </span>
-              </td>
-              <td style="padding:0px;width:88%;vertical-align:text-top">
-                Awarded The Three Good Student Scholarship (21/387).
-              </td>
-            </tr>
-  
-            <tr>
-              <td style="padding:0px;width:12%;min-width:100px;vertical-align:text-top">
-                <span style="margin-left:16px;font-weight:bold;"> Nov 2025 </span>
-              </td>
-              <td style="padding:0px;width:88%;vertical-align:text-top">
-                Won First Prize in <a href="https://www.cmathc.org.cn/csmd/390.html"> Hubei Province China Mathematics Competition</a> (59/1180).
-              </td>
-            </tr>
+      <div class="pub-item">
+        <p class="pub-title">A Sparse Frequency-Aware Spiking Transformer with Hierarchical Wavelet Pruning and Adaptive Dual-Path Routing</p>
+        <div class="pub-authors">Zihe Dong*, Xueyi Wang*, Zhenyu Zhang*, <strong>Xianzhe Meng</strong></div>
+        <div class="pub-venue">Preprint (Under Conference Review), 2026</div>
+        <div class="pub-links"><a href="#">arXiv</a><a href="#">Project Page</a></div>
+      </div>
 
-            <tr>
-              <td style="padding:0px;width:12%;min-width:100px;vertical-align:text-top">
-                <span style="margin-left:16px;font-weight:bold;"> Sep 2025 </span>
-              </td>
-              <td style="padding:0px;width:88%;vertical-align:text-top">
-                Led Huazhong University of Science and Technology <a href="https://news.hubeidaily.net/pc/c_4429573.html"> Social Practice Team </a> to win Second Prize (Leader) .
-              </td>
-            </tr>
+      <div class="pub-item">
+        <p class="pub-title">HeteroAb: Heterogeneity-aware Antibody Design</p>
+        <div class="pub-authors">Ling Luo*, Hongyuan Chang*, <strong>Xianzhe Meng*</strong>, Ye Du, Yutaka Matsuo, Mengsha Tong, Wenbin Jiang, Qian Niu, Rongshan Yu</div>
+        <div class="pub-venue">Preprint (Under Conference Review), 2026</div>
+        <div class="pub-links"><a href="#">arXiv</a><a href="#">Project Page</a></div>
+      </div>
+    </section>
 
-            <tr>
-              <td style="padding:0px;width:12%;min-width:100px;vertical-align:text-top">
-                <span style="margin-left:16px;font-weight:bold;"> Sept 2024 </span>
-              </td>
-              <td style="padding:0px;width:88%;vertical-align:text-top">
-                Serve as a Study Monitor of Automation Innovation Experimental Class.
-              </td>
-            </tr>
-          </table>
+    <section id="projects">
+      <h2>Open-source Projects</h2>
 
-          
-          <div style="height:32px;"></div>
+      <div class="pub-item">
+        <p class="pub-title"><a href="https://github.com/XianzheMeng/MAMS-multi-agent-music-system" target="_blank">MAMS: A Multi-Agent Music System</a></p>
+        <div class="pub-authors">An autonomous multi-agent framework designed for music composition and AI-driven melody orchestration.</div>
+        <div class="pub-links"><a href="https://github.com/XianzheMeng/MAMS-multi-agent-music-system" target="_blank">Code</a></div>
+      </div>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px;width:100%;vertical-align:middle">
-                <h2 style="margin-left:16px;">Research</h2></span>
-              </td>
-            </tr>
-          </tbody></table>
+      <div class="pub-item">
+        <p class="pub-title"><a href="https://github.com/Henryonly/AXR-Chinese-chess-AI" target="_blank">AXR: A Self-Play RL Framework for Chinese Chess Based on MCTS</a></p>
+        <div class="pub-authors">A reinforcement learning framework featuring Monte Carlo Tree Search (MCTS) for Chinese Chess self-play training. Developed for the course instructed by Prof. Renzhi Lu.</div>
+        <div class="pub-links"><a href="https://github.com/Henryonly/AXR-Chinese-chess-AI" target="_blank">Code</a></div>
+      </div>
 
-          <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:35%;vertical-align:middle">
-                <img src="images/research/ICML 2026.png" alt="clean-usnob" width="250">
-              </td>
-              <td style="padding:8px;width:65%;vertical-align:middle">
-                <p>
-                  <a href="https://arxiv.org/abs/2601.18588">
-                    <span class="papertitle">Stability as a Liability: Systematic Breakdown of Linguistic Structure in LLMs</span>
-                  </a>
-                  <br>
-				  <strong>Xianzhe Meng*</strong>, 
-                  <a href="https://openreview.net/profile?id=%7EQiangsheng_Zeng1">Qiangsheng Zeng*</a>, 
-                  <a href="https://openreview.net/profile?id=~Ling_Luo7">Ling Luo*</a>, 
-                  <a href="https://openreview.net/profile?id=~Qinghan_Yang2">Qinghan Yang</a>, 
-                  <a href="https://openreview.net/profile?id=~Jiarui_Hao1">Jiarui Hao</a>, 
-                  <a href="https://openreview.net/profile?id=~Wenbo_Wu3">Wenbo Wu</a>, 
-                  <a href="https://openreview.net/profile?id=~Qinyu_Wang2">Qinyu Wang</a>,
-				  <a href="https://openreview.net/profile?id=~Rui_Yin9">Rui Yin</a>,
-				  <a href="https://openreview.net/profile?id=%7ELin_Qi12">Lin Qi</a>,
-				  <a href="https://scholar.google.com/citations?user=F4VJqU8AAAAJ&hl=zh-CN">Renzhi Lu</a>
-                </p>
-                <p>
-                  <em> Preprint </em>
-                  <br>
-                  <em>Submitting to a Conference</em>, 2026
-                  <br>
-                  <a href="https://arxiv.org/abs/2601.18588">arXiv</a>
-                </p>
-              </td>
-            </tr>
+      <div class="pub-item">
+        <p class="pub-title"><a href="https://github.com/Henryonly/AI-XiaoZhi" target="_blank">Intelligent Dialogue and Image Generation System Based on C Language</a></p>
+        <div class="pub-authors">An advanced system delivering generative AI functionalities completely integrated within a native C framework. Achieved 2 A+ grades (Top 3/387 in the course instructed by Prof. Chunjie Zhou).</div>
+        <div class="pub-links"><a href="https://github.com/Henryonly/AI-XiaoZhi" target="_blank">Code</a></div>
+      </div>
 
-            <tr>
-              <td style="padding:16px;width:35%;vertical-align:middle">
-                <img src="images/research/QR-MAPPO.png" alt="clean-usnob" width="250">
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                <p>
-                  <a>
-                    <span class="papertitle">Application of Quantum Multi-Agent Reinforcement Learning in Microgrid Energy Scheduling</span>
-                  </a>
-                  <br>
-                  <a href="http://biic.aia.hust.edu.cn/info/1016/1207.htm">Zhenyu Zhang</a>, 
-                  <strong>Xianzhe Meng</strong>,
-                  <a href="https://openreview.net/profile?id=%7EManqiu_Huang1">Manqiu Huang</a>, 
-                  <a href="https://scholar.google.com/citations?user=BrJUTvoAAAAJ&hl=en">Zhigang Zeng</a> 
-				</p>
-                <p>
-                  <em>JAS</em>, 2026
-                  <br>
-                  <a>arXiv</a>
-                  /
-                  <a>Project Page</a>
-                </p>
-              </td>
-            </tr>
+      <div class="pub-item">
+        <p class="pub-title"><a href="https://github.com/Henryonly/pyks-AI" target="_blank">Generative AI for Dialogue and Pictures</a></p>
+        <div class="pub-authors">A pipeline utilizing python libraries to interface with advanced LLMs and diffusion models for conversational agents.</div>
+        <div class="pub-links"><a href="https://github.com/Henryonly/pyks-AI" target="_blank">Code</a></div>
+      </div>
+    </section>
 
-            <tr>
-              <td style="padding:16px;width:35%;vertical-align:middle">
-                <img src="images/research/DSN.png" alt="clean-usnob" width="250">
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                <p>
-                  <a>
-                    <span class="papertitle">DSN: Energy-Efficient EMG Signal Classification Method Enabling Real-Time Monitoring for Edge Healthcare</span>
-                  </a>
-                  <br>
-                  <a href="http://biic.aia.hust.edu.cn/info/1016/1207.htm">Zhenyu Zhang*</a>, 
-                  <strong>Xianzhe Meng*</strong>,
-                  <a href="https://scholar.google.com/citations?user=ZP4ETh0AAAAJ&hl=en">Jianglan Wei</a>, 
-				<a href="https://openreview.net/profile?id=~Mingjie_Zeng2">Mingjie Zeng</a>, 
-                  <a href="https://scholar.google.com/citations?user=BrJUTvoAAAAJ&hl=en">Zhigang Zeng</a>
-				</p>
-                <p>
-                  <em>Submitting to a Journal</em>, 2026
-                  <br>
-                  <a>arXiv</a>
-                  /
-                  <a>Project Page</a>
-                </p>
-              </td>
-            </tr>
+    <section id="services">
+      <h2>Professional Services</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">ICASSP 2025</span>
+          <span class="news-content">Invited Reviewer, IEEE International Conference on Acoustics, Speech and Signal Processing.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">HUST 2025</span>
+          <span class="news-content">Event Host & Coordinator, Q&A Session for C Programming Course Project.</span>
+        </li>
+      </ul>
+    </section>
 
-            <tr>
-              <td style="padding:16px;width:35%;vertical-align:middle">
-                <img src="images/research/HUS-SNN.png" alt="clean-usnob" width="250">
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                <p>
-                  <a>
-                    <span class="papertitle">HUS-SNN: Homeostatic Unbiased Sparsity for N:M Sparse Spiking Neural Networks</span>
-                  </a>
-                  <br>
-                  <strong>Xianzhe Meng*</strong>,
-                  <a href="http://biic.aia.hust.edu.cn/info/1016/1207.htm">Zhenyu Zhang*</a>, 
+    <section id="skills-interests">
+      <h2>Skills & Personal Interests</h2>
+      
+      <div class="tag-container">
+        <div class="tag-title">Programming:</div>
+        <div class="tag highlight">C / C++</div>
+        <div class="tag highlight">Python</div>
+        <div class="tag">Java</div>
+        <div class="tag">Rust</div>
+        <div class="tag">Go</div>
+        <div class="tag">HTML / CSS / JavaScript</div>
+        <div class="tag">Linux Operations</div>
+        <div class="tag">PyTorch</div>
+      </div>
 
-					<a href="https://openreview.net/profile?id=~Zihe_Dong2">Zihe Dong</a>, 
-				<a href="https://openreview.net/profile?id=~Xueyi_Wang8">Xueyi Wang</a>,
-					<a href="https://openreview.net/profile?id=~Yiming_Guo6">Yiming Guo</a>
-				</p>
-                <p>
-                  <em>Submitting to a Conference</em>, 2026
-                  <br>
-                  <a>arXiv</a>
-                  /
-                  <a>Project Page</a>
-                </p>
-              </td>
-            </tr>
+      <div class="tag-container">
+        <div class="tag-title">Mathematics:</div>
+        <div class="tag">Matrix Theory</div>
+        <div class="tag">Convex Optimization</div>
+        <div class="tag">Real Analysis</div>
+        <div class="tag">Basic Functional Analysis</div>
+      </div>
 
-            <tr>
-              <td style="padding:16px;width:35%;vertical-align:middle">
-                <img src="images/research/dSNN.png" alt="clean-usnob" width="230">
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                <p>
-                  <a>
-                    <span class="papertitle">A Sparse Frequency-Aware Spiking Transformer with Hierarchical Wavelet Pruning and Adaptive Dual-Path Routing</span>
-                  </a>
-                  <br>				                  
-					<a href="https://openreview.net/profile?id=~Zihe_Dong2">Zihe Dong*</a>, 
-				<a href="https://openreview.net/profile?id=~Xueyi_Wang8">Xueyi Wang*</a>,
-                  <a href="http://biic.aia.hust.edu.cn/info/1016/1207.htm">Zhenyu Zhang*</a>, 
-                  <strong>Xianzhe Meng</strong>
-				</p>
-                <p>
-                  <em>Submitting to a Conference</em>, 2026
-                  <br>
-                  <a>arXiv</a>
-                  /
-                  <a>Project Page</a>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:16px;width:35%;vertical-align:middle">
-                <img src="images/research/HeteroAb.png" alt="clean-usnob" width="250">
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                <p>
-                  <a>
-                    <span class="papertitle">HeteroAb: Heterogeneity-aware Antibody Design</span>
-                  </a>
-                  <br>				          
-					<a href="https://openreview.net/profile?id=~Ling_Luo7">Ling Luo*</a>, 
-				<a href="https://openreview.net/profile?id=~Hongyuan Chang1">Hongyuan Chang*</a>,
-					<strong>Xianzhe Meng*</strong>, 
-					<a href="https://openreview.net/profile?id=~Ye_Du4">Ye Du</a>, 
-					<a href="https://openreview.net/profile?id=~Yutaka_Matsuo1">Yutaka Matsuo</a>, 
-					<a href="https://openreview.net/profile?id=~Mengsha Tong1">Mengsha Tong</a>, 
-					<a href="https://openreview.net/profile?id=~Wenbin Jiang4">Wenbin Jiang</a>, 
-					<a href="https://openreview.net/profile?id=~Qian Niu3">Qian Niu</a>, 
-					<a href="https://openreview.net/profile?id=~Rongshan Yu1">Rongshan Yu</a>
-                  
-				</p>
-                <p>
-                  <em>Submitting to a Conference</em>, 2026
-                  <br>
-                  <a>arXiv</a>
-                  /
-                  <a>Project Page</a>
-                </p>
-              </td>
-            </tr>
-  
-          </tbody></table>
-  
-          
-          <div style="height:32px;"></div>
+      <div class="tag-container">
+        <div class="tag-title">Sports:</div>
+        <div class="tag highlight">Tennis</div>
+        <div class="tag highlight">Swimming</div>
+      </div>
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px;width:100%;vertical-align:middle">
-                <h2 style="margin-left:16px;">Open-source Projects</h2></span>
-              </td>
-            </tr>
-          </tbody></table>
+      <div class="tag-container">
+        <div class="tag-title">Favorite Artists:</div>
+        <div class="tag">Jay Chou</div>
+        <div class="tag">Taylor Swift</div>
+        <div class="tag">Lana Del Rey</div>
+        <div class="tag">Kenshi Yonezu</div>
+      </div>
+    </section>
 
-          <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;min-width:250px;width:25%;vertical-align:middle">
-                <img src="images/research/MAMS.png" alt="clean-usnob" width="235">
-              </td>
-              <td style="padding:8px;width:65%;vertical-align:middle">
-                <p>
-                  <a href="https://github.com/XianzheMeng/MAMS-multi-agent-music-system">
-                    <span class="papertitle">MAMS: A multi-agent music system.</span>
-                  </a>
-                  <br>
-                  <a>Designed for a competition.</a>
-                </p>
-                <p>
-                  <a href="https://github.com/XianzheMeng/MAMS-multi-agent-music-system/blob/master/README.md">Introduction</a>
-                  / 
-                  <a href="https://github.com/XianzheMeng/MAMS-multi-agent-music-system">Code</a>
-                  <br>
-                </p>
-              </td>
-            </tr>
-          </table>
+    <footer>
+      <p>&copy; 2026 Xianzhe Meng. Powered by modern minimalist typography.</p>
+    </footer>
 
-          <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;min-width:250px;width:25%;vertical-align:middle">
-                <img src="images/course/pks2.png" alt="clean-usnob" width="235">
-              </td>
-              <td style="padding:8px;width:65%;vertical-align:middle">
-                <p>
-                  <a href="https://github.com/Henryonly/AXR-Chinese-chess-AI">
-                    <span class="papertitle">AXR: A Self Play Reinforcement Learning Framework for Chinese Chess Based on Monte Carlo Tree Searchs</span>
-                  </a>
-                  <br>
-                  <a href="https://www.icourse163.org/spoc/course/HUST-1466077264">Course</a> taught by <a href="https://scholar.google.com/citations?user=F4VJqU8AAAAJ&hl=zh-CN">Renzhi Lu</a>
-                </p>
-                <p>
-                  <a href="https://github.com/Henryonly/AXR-Chinese-chess-AI/blob/main/README.md">Introduction</a>
-                  / 
-                  <a href="https://github.com/Henryonly/AXR-Chinese-chess-AI">Code</a>
-                  <br>
-                </p>
-              </td>
-            </tr>
-          </table>
-
-
-		<table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-		    <tr>
-		      <td style="padding:16px;min-width:250px;width:25%;vertical-align:middle">
-		        <img src="images/course/cks.png" alt="cks" width="240">
-		      </td>
-		      <td style="padding:8px;width:65%;vertical-align:middle">
-		        <p>
-		          <a href="https://github.com/Henryonly/AI-XiaoZhi">
-		            <span class="papertitle">Intelligent Dialogue and Picture Generation System Based on C Language</span>
-		          </a>
-		          <br>
-		          <a href="https://www.icourse163.org/course/HUST-1207043812?tid=1475277442">Course</a> taught by <a href="https://www.researchgate.net/profile/Chunjie-Zhou">Chunjie Zhou</a>, et al.
-		        </p>
-				<p>
-					(2 A+s with my teammate out of the 3/387 in this course)
-				</p>
-				
-		        <p>
-		          <a href="https://github.com/Henryonly/AI-XiaoZhi/blob/master/README.md">Introduction</a>
-		          / 
-		          <a href="https://github.com/Henryonly/AI-XiaoZhi">Code</a>
-		          <br>
-		        </p>
-
-		      </td>
-		    </tr>
-		  </table>
-
-		<table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;min-width:250px;width:25%;vertical-align:middle">
-                <img src="images/course/pks1-1.png" alt="dialogure" width="120">
-				<img src="images/course/pks1-2.png" alt="picture" width="120">
-              </td>
-              <td style="padding:8px;width:65%;vertical-align:middle">
-                <p>
-                  <a href="https://github.com/Henryonly/pyks-AI">
-                    <span class="papertitle">Generative AI for Dialogue and Pictures</span>
-                  </a>
-                  <br>
-                  <a href="https://www.icourse163.org/spoc/course/HUST-1466077264">Course</a> taught by <a href="https://scholar.google.com/citations?user=F4VJqU8AAAAJ&hl=zh-CN">Renzhi Lu</a>
-                </p>
-                <p>
-                  <a href="https://github.com/Henryonly/pyks-AI/blob/main/README.md">Introduction</a>
-                  / 
-                  <a href="https://github.com/Henryonly/pyks-AI">Code</a>
-                  <br>
-                </p>
-              </td>
-            </tr>
-          </table>
-
-
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px">
-                <br>
-                <p style="text-align:right;font-size:small;">
-                  Template stolen from <a href="https://jonbarron.info">Jon Barron</a>.
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-        </td>
-      </tr>
-    </table>
-  </body>
+  </div>
+</body>
 </html>
